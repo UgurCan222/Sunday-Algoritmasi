@@ -1,26 +1,22 @@
-metin = 'abcadabadccdbabd'
-desen = 'cadab'
+def check(char, pat, lenpat, textindex):
+    j = lenpat - 1
+    while j >= 0:
+        if pat[j] == char:
+            return textindex - j
+        j -= 1
+    return -1
+     
+def sundayAlg(text, pat):
+    t, p = len(text), len(pat)
+    i = 0
+    while i < t - p:
+        z = p - 1
+        while z >= 0 and pat[z] == text[i+z]:
+            z -= 1
+        if z == -1:
+            return i
+        i += check(text[i+p], pat, p, i+p)
+    return -1
 
-def sunday_algoritması(metin, desen):
-    n = len(metin)  # metnin uzunluğu
-    m = len(desen)  # desenin uzunluğu
-    i = 0  # metin indeksi
-    j = 0  # desen indeksi
-    while i < n:
-        if metin[i] == desen[j]:
-            if j == m - 1:
-                return i - m + 1  # desen bulundu
-            j += 1
-            i += 1
-        else:
-            if i + m < n:
-                k = m - 1
-                while k >= 0 and metin[i + k] != desen[k]:
-                    k -= 1
-                i = i + m - k
-                j = 0
-            else:
-                break
-    return -1  # desen bulunamadı
-
-print(sunday_algoritması(metin, desen))  
+print(sundayAlg('mY5#E3g!F*6tI9Fg6tW*6t', 'W*6t'))
+print(sundayAlg('abcadabadccdbabd', 'cadab'))
